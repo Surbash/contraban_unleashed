@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A-Z Games Directory | CONTRABAN UNLEASHED</title>
+
+  
+  <!--Favicon-->
+  <link rel="shortcut icon" href="images/Neon Pixel Game Circle .png" type="image/x-icon">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+  <!--Custom CSS-->
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    :root {
+      --primary-color: #ff2a6d;
+      --secondary-color: #05d9e8;
+      --accent-color: #d300c5;
+      --dark-bg: #0d0221;
+      --darker-bg: #050110;
+      --light-bg: #f8f9fa;
+      --text-dark: #ffffff;
+      --text-light: #212529;
+      --card-bg-dark: rgba(13, 2, 33, 0.7);
+      --card-bg-light: rgba(255, 255, 255, 0.9);
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-dark);
+      font-family: 'Orbitron', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.5s ease;
+    }
+
+    .light-mode {
+      background-color: var(--light-bg);
+      color: var(--text-light);
+    }
+
+    /* Header */
+    .directory-header {
+      text-align: center;
+      padding: 60px 0 30px;
+      position: relative;
+    }
+
+    .directory-header h1 {
+      color: var(--secondary-color);
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 15px var(--secondary-color);
+      letter-spacing: 3px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .light-mode .directory-header h1 {
+      color: var(--primary-color);
+      text-shadow: 0 0 15px var(--primary-color);
+    }
+
+    .directory-header h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+      border-radius: 4px;
+    }
+
+    /* Alphabet Navigation */
+    .alphabet-nav {
+      background: var(--card-bg-dark);
+      padding: 20px;
+      border-radius: 15px;
+      margin: 0 auto 40px;
+      max-width: 1200px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      position: sticky;
+      top: 20px;
+      z-index: 100;
+    }
+
+    .light-mode .alphabet-nav {
+      background: var(--card-bg-light);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .alphabet-nav span {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .alphabet-nav a {
+      color: var(--secondary-color);
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .light-mode .alphabet-nav a {
+      color: var(--primary-color);
+    }
+
+    .alphabet-nav a:hover {
+      background: rgba(5, 217, 232, 0.2);
+      border-color: var(--secondary-color);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px var(--secondary-color);
+    }
+
+    .light-mode .alphabet-nav a:hover {
+      background: rgba(255, 42, 109, 0.2);
+      border-color: var(--primary-color);
+      box-shadow: 0 5px 15px var(--primary-color);
+    }
+
+    /* Alphabet Sections */
+    .directory-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .alphabet-section {
+      background: var(--card-bg-dark);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .light-mode .alphabet-section {
+      background: var(--card-bg-light);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .alphabet-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 15px var(--primary-color);
+    }
+
+    .light-mode .alphabet-section:hover {
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px var(--secondary-color);
+    }
+
+    .alphabet-section::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      z-index: -1;
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+      background-size: 400%;
+      border-radius: 17px;
+      opacity: 0.7;
+      animation: animateBorder 8s linear infinite;
+    }
+
+    @keyframes animateBorder {
+      0% { background-position: 0 0; }
+      50% { background-position: 400% 0; }
+      100% { background-position: 0 0; }
+    }
+
+    .alphabet-section h2 {
+      color: var(--secondary-color);
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 5px var(--secondary-color);
+      border-bottom: 2px solid var(--secondary-color);
+      padding-bottom: 10px;
+      position: relative;
+    }
+
+    .light-mode .alphabet-section h2 {
+      color: var(--primary-color);
+      text-shadow: 0 0 5px var(--primary-color);
+      border-bottom: 2px solid var(--primary-color);
+    }
+
+    .alphabet-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .alphabet-section li {
+      padding: 8px 0;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+      position: relative;
+      padding-left: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .light-mode .alphabet-section li {
+      border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+    }
+
+    .alphabet-section li::before {
+      content: '▶';
+      color: var(--accent-color);
+      position: absolute;
+      left: 0;
+      font-size: 0.8rem;
+    }
+
+    .alphabet-section li:hover {
+      color: var(--secondary-color);
+      transform: translateX(5px);
+    }
+
+    .light-mode .alphabet-section li:hover {
+      color: var(--primary-color);
+    }
+
+    /* Back to Top Button */
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px var(--primary-color);
+      z-index: 99;
+      transition: all 0.3s ease;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .light-mode #backToTop {
+      background: var(--secondary-color);
+      box-shadow: 0 0 20px var(--secondary-color);
+    }
+
+    #backToTop.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #backToTop:hover {
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 0 30px var(--primary-color);
+    }
+
+    .light-mode #backToTop:hover {
+      box-shadow: 0 0 30px var(--secondary-color);
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(145deg, var(--darker-bg), var(--dark-bg));
+      border-top: 2px solid var(--primary-color);
+      box-shadow: 0 0 10px var(--primary-color);
+      padding: 40px 0;
+      margin-top: 60px;
+    }
+
+    .light-mode footer {
+      background: linear-gradient(145deg, #f1f1f1, #ffffff);
+      border-top: 2px solid var(--secondary-color);
+      box-shadow: 0 0 10px var(--secondary-color);
+    }
+
+    footer .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    footer .navbar-brand {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: white !important;
+    }
+
+    footer .navbar-brand span {
+      color: var(--secondary-color);
+    }
+
+    .light-mode footer .navbar-brand span {
+      color: var(--primary-color);
+    }
+
+    footer .nav-link {
+      color: rgba(255, 255, 255, 0.7) !important;
+      transition: all 0.3s ease;
+    }
+
+    footer .nav-link:hover {
+      color: var(--secondary-color) !important;
+      text-shadow: 0 0 5px var(--secondary-color);
+    }
+
+    .light-mode footer .nav-link:hover {
+      color: var(--primary-color) !important;
+      text-shadow: 0 0 5px var(--primary-color);
+    }
+
+    footer p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+
+    .light-mode footer p {
+      color: rgba(0, 0, 0, 0.7);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .directory-header h1 {
+        font-size: 2.8rem;
+      }
+      
+      .directory-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .directory-header {
+        padding: 40px 0 20px;
+      }
+      
+      .directory-header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .alphabet-nav {
+        padding: 15px;
+        top: 10px;
+      }
+      
+      .alphabet-nav a {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+      }
+      
+      .alphabet-section {
+        padding: 20px;
+      }
+      
+      .alphabet-section h2 {
+        font-size: 1.7rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .directory-header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .directory-container {
+        grid-template-columns: 1fr;
+      }
+      
+      #backToTop {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Neon Ribbon Navbar -->
+<nav class="navbar navbar-expand-lg neon-ribbon sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="images/Neon Pixel Game Circle .png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top me-2">
+      CONTRABAN<span>UNLEASHED</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="A-Z.html"><i class="fas fa-list-ul me-1"></i> All Games (A-Z)</a></li>
+        <li class="nav-item"><a class="nav-link" href="dropdown.html"><i class="fas fa-tags me-1"></i> Categories</a></li>
+        <li class="nav-item"><a class="nav-link" href="community.html"><i class="fas fa-users me-1"></i> Community</a></li>
+        <li class="nav-item"><a class="nav-link" href="profile.html"><i class="fas fa-user me-1"></i> Profile</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-user me-1"></i> Contact Us</a></li>
+         <li class="nav-item"><a class="nav-link" href="support.html"><i class="fas fa-user me-1"></i>Support</a></li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item d-flex align-items-center me-3">
+          <label class="mode-toggle">
+            <input type="checkbox" id="modeToggle">
+            <span class="slider"></span>
+          </label>
+          <span class="ms-2 d-none d-md-inline">Dark Mode</span>
+        </li>
+        <li class="nav-item">
+          <form class="d-flex">
+            <div class="input-group">
+              <input class="form-control form-control-sm" type="search" placeholder="Search games..." aria-label="Search">
+              <button class="btn btn-outline-light btn-sm" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="directory-header">
+  <h1><i class="fas fa-gamepad me-2"></i> A-Z GAMES DIRECTORY</h1>
+</div>
+
+<div class="alphabet-nav">
+  A-Z:
+  <span>
+    <a href="#A">A</a>
+    <a href="#B">B</a>
+    <a href="#C">C</a>
+    <a href="#D">D</a>
+    <a href="#E">E</a>
+    <a href="#F">F</a>
+    <a href="#G">G</a>
+    <a href="#H">H</a>
+    <a href="#I">I</a>
+    <a href="#J">J</a>
+    <a href="#K">K</a>
+    <a href="#L">L</a>
+    <a href="#M">M</a>
+    <a href="#N">N</a>
+    <a href="#O">O</a>
+    <a href="#P">P</a>
+    <a href="#Q">Q</a>
+    <a href="#R">R</a>
+    <a href="#S">S</a>
+    <a href="#T">T</a>
+    <a href="#U">U</a>
+    <a href="#V">V</a>
+    <a href="#W">W</a>
+    <a href="#X">X</a>
+    <a href="#Y">Y</a>
+    <a href="#Z">Z</a>
+  </span>
+</div>
+
+<div class="directory-container">
+  <!-- A Section -->
+  <div class="alphabet-section" id="A">
+    <h2>A</h2>
+    <ul>
+      <li>Among Us</li>
+      <li>Assassin's Creed</li>
+      <li>Age of Empires</li>
+      <li>Avegers Age of Ultron</li>
+      <li>Assasins Creed Valhalla</li>
+      <li>Alita: Battle Angel</li>
+      <li>ATV Legends</li>
+    </ul>
+  </div>
+
+  <!-- B Section -->
+  <div class="alphabet-section" id="B">
+    <h2>B</h2>
+    <ul>
+      <li>Battlefield</li>
+      <li>Bioshock</li>
+      <li>Borderlands</li>
+      <li>Beowolf</li>
+      <li>Battlefield 2</li>
+      <li>Beyond Good & Evil</li>
+      <li>Brothers: A Tale of Two Sons</li>
+    </ul>
+  </div>
+
+  <!-- C Section -->
+  <div class="alphabet-section" id="C">
+    <h2>C</h2>
+    <ul>
+      <li>Call of Duty</li>
+      <li>Celeste</li>
+      <li>Crash Bandicoot</li>
+      <li>Chernobyl</li>
+      <li>Contra</li>
+      <li>Contract Killer</li>
+      <li>Cyberpunk 2077</li>
+    </ul>
+  </div>
+
+  <!-- D Section -->
+  <div class="alphabet-section" id="D">
+    <h2>D</h2>
+    <ul>
+      <li>Drake's Fortune</li>
+      <li>Dark Souls 1</li>
+      <li>Dark Souls 2</li>
+      <li>Dawn of Fantasy</li>
+      <li>Days Gone</li>
+      <li>Dawn of Man</li>
+      <li>Dead Horizon</li>
+    </ul>
+  </div>
+
+  <!-- E Section -->
+  <div class="alphabet-section" id="E">
+    <h2>E</h2>
+    <ul>
+      <li>E.Y.E: Divine Cybermancy</li>  
+      <li>EA Sports FC 24</li>
+      <li>EA Sports FC 25</li>
+      <li>EA Sports PGA Tour</li>
+      <li>Eador: Masters of the Broken World</li>
+      <li>Eador. Imperium</li>
+      <li>Eagle Flight</li>
+    </ul>  
+  </div>
+
+  <!-- F Section -->
+  <div class="alphabet-section" id="F">
+    <h2>F</h2>
+    <ul>
+      <li>Fifa 23</li>
+      <li>Fifa 22</li>
+      <li>Fifa 21</li>
+      <li>Fifa 20</li>
+      <li>Final Fantasy</li>
+      <li>Falcon</li>
+      <li>Final Destination</li>
+    </ul>
+  </div>
+
+  <!-- G Section -->
+  <div class="alphabet-section" id="G">
+    <h2>G</h2>
+    <ul>
+      <li>God of War</li>
+      <li>God of War: Remastered</li>
+      <li>Genshin Impact</li>
+      <li>Godzilla</li>
+      <li>GP: Motor Race</li>
+      <li>GT Drift</li>
+      <li>Grand Theft Auto</li>
+    </ul>
+  </div>
+
+  <!-- H Section -->
+  <div class="alphabet-section" id="H">
+    <h2>H</h2>
+    <ul>
+      <li>Halo ODST</li>
+      <li>Halo 2</li>
+      <li>Halo 3</li>
+      <li>Horizon</li>
+      <li>Hellboy</li>
+      <li>Harmony's Odessey</li>
+      <li>Holocaust</li>
+    </ul>
+  </div>
+
+  <!-- I Section -->
+  <div class="alphabet-section" id="I">
+    <h2>I</h2>
+    <ul>
+      <li>Indiana Jones</li>
+      <li>Indiana Jones and the Fate of Atlantis</li>
+      <li>Indiana Jones and the Great Circle</li>
+      <li>Indiana Jones and the Emperor's Tomb</li>
+      <li>Indiana Jones and the Infernal Machine</li>
+      <li>inCARceration</li>
+      <li>Induction</li>
+    </ul>
+  </div>
+
+  <!-- J Section -->
+  <div class="alphabet-section" id="J">
+    <h2>J</h2>
+    <ul>
+      <li>Jumanji</li>
+      <li>Jurassic Park 1</li>
+      <li>Jurassic Park 2</li>
+      <li>Jurassic Park 3</li>
+      <li>Jump Force</li>
+      <li>Jump Force 2</li>
+      <li>JETS</li>
+    </ul>
+  </div>
+
+  <!-- K Section -->
+  <div class="alphabet-section" id="K">
+    <h2>K</h2>
+    <ul>
+      <li>Killer Bean</li>
+      <li>King Arthur: A Knights Tale</li>
+      <li>Kenshi</li>
+      <li>Known Mysteries</li>
+      <li>Knuckle Sandwich</li>
+      <li>Kingsway</li>
+      <li>Kingdoms</li>
+    </ul>
+  </div>
+
+  <!-- L Section -->
+  <div class="alphabet-section" id="L">
+    <h2>L</h2>
+    <ul>
+      <li>Lust N Dead</li>
+      <li>Legend of Grimrock</li>
+      <li>Legend of Grimrock 2</li>
+      <li>L.A Noire</li>
+      <li>Left 4 Dead</li>
+      <li>Left 4 Dead 2</li>
+      <li>Legend of the Dungeon</li>
+    </ul>
+  </div>
+
+  <!-- M Section -->
+  <div class="alphabet-section" id="M">
+    <h2>M</h2>
+    <ul>
+      <li>Motorcross Freestyle</li>
+      <li>Minecraft</li>
+      <li>Metal Slug</li>
+      <li>Metal Slug 2</li>
+      <li>Metal Slug 3</li>
+      <li>Mulan</li>
+      <li>Mass Effect</li>
+    </ul>
+  </div>
+
+  <!-- N Section -->
+  <div class="alphabet-section" id="N">
+    <h2>N</h2>
+    <ul>
+      <li>NEON Shift</li>
+      <li>Nitro Kings</li>
+      <li>Naruto Ninja Storm 4</li>
+      <li>Naruto x Boruto Ultimate Ninja Force</li>
+      <li>Nitro Nation</li>
+      <li>Nosferatu</li>
+      <li>Need for Speed</li>
+    </ul>   
+  </div>
+
+  <!-- O Section -->
+  <div class="alphabet-section" id="O">
+    <h2>O</h2>
+    <ul>
+      <li>ORION's Drift</li>
+      <li>Orbo's Odessy</li>
+      <li>OPUS Magnum</li>
+      <li>Operation Tango</li>
+      <li>Orcs Must Die 2</li>
+      <li>Orcs Must Die 3</li>
+      <li>Order of War</li>
+    </ul>
+  </div>
+
+  <!-- P Section -->
+  <div class="alphabet-section" id="P">
+    <h2>P</h2>
+    <ul>
+      <li>PHANTOM</li>
+      <li>PURGE</li>
+      <li>PUBG</li>
+      <li>PAYBACK</li>
+      <li>Pathfinder: Gallowspire</li>
+      <li>P.A.M.E.L.A</li>
+      <li>Prince of Persia: Remastered</li>
+    </ul>
+  </div>
+
+  <!-- Q Section -->
+  <div class="alphabet-section" id="Q">
+    <h2>Q</h2>
+    <ul>
+      <li>QBasic Gorillas</li>
+      <li>Quantum Solace</li>
+      <li>QUAKE 1</li>
+      <li>QUAKE 2</li>
+      <li>QUAKE RTX</li>
+      <li>QUANTUM LEAGUE</li>
+      <li>QUANTUM Break</li>
+    </ul>
+  </div>
+
+  <!-- R Section -->
+  <div class="alphabet-section" id="R">
+    <h2>R</h2>
+    <ul>
+      <li>Red Dead Redemption</li>
+      <li>Red Dead Redemption 2</li>
+      <li>Resident Evil 1</li>
+      <li>Resident Evil 2</li>
+      <li>Resident Evil 3</li>
+      <li>Resident Evil 4</li>
+      <li>Resident Evil 5</li>
+    </ul>
+  </div>
+
+  <!-- S Section -->
+  <div class="alphabet-section" id="S">
+    <h2>S</h2>
+    <ul>
+      <li>Star Wars: Battlefront</li>
+      <li>Star Wars: Battlefront 2</li>
+      <li>Star Wars: Jedi Fallen Order</li>
+      <li>Star Wars: Squadrons</li>
+      <li>Street Fighter 5</li>
+      <li>Street Fighter 6</li>
+      <li>Super Mario Odyssey</li>
+    </ul>
+  </div>
+
+  <!-- T Section -->
+  <div class="alphabet-section" id="T">
+    <h2>T</h2>
+    <ul>
+      <li>Tekken 7</li>
+      <li>Tekken 8</li>
+      <li>The Witcher 3</li>
+      <li>The Witcher 4</li>
+      <li>Tomb Raider</li>
+      <li>Tomb Raider: Anniversary</li>
+      <li>Tomb Raider: Underworld</li>
+    </ul>
+  </div>
+
+  <!-- U Section -->
+  <div class="alphabet-section" id="U">
+    <h2>U</h2>
+    <ul>
+      <li>Uncharted 1</li>
+      <li>Uncharted 2</li>
+      <li>Uncharted 3</li>
+      <li>Uncharted 4</li>
+      <li>Ultimate Marvel vs. Capcom 3</li>
+      <li>Undertale</li>
+      <li>Unravel</li>
+    </ul>
+  </div>
+
+  <!-- V Section -->
+  <div class="alphabet-section" id="V">
+    <h2>V</h2>
+    <ul>
+      <li>Valorant</li>
+      <li>Valhalla</li>
+      <li>Vampyr</li>
+      <li>Vampire: The Masquerade - Bloodlines</li>
+      <li>Vampire: The Masquerade - Swansong</li>
+      <li>Valiant Hearts</li>
+      <li>Valkyria Chronicles</li>
+    </ul>
+  </div>
+
+  <!-- W Section -->
+  <div class="alphabet-section" id="W">
+    <h2>W</h2>
+    <ul>
+      <li>Watch Dogs</li>
+      <li>Watch Dogs 2</li>
+      <li>Watch Dogs: Legion</li>
+      <li>Warframe</li>
+      <li>World of Warcraft</li>
+      <li>Wolfenstein: The New Order</li>
+      <li>Wolfenstein: The Old Blood</li>
+    </ul>
+  </div>
+
+  <!-- X Section -->
+  <div class="alphabet-section" id="X">
+    <h2>X</h2>
+    <ul>
+      <li>XCOM 2</li>
+      <li>XCOM: Enemy Unknown</li>
+      <li>Xenoblade Chronicles</li>
+      <li>Xenoblade Chronicles 2</li>
+      <li>Xenogears</li>
+      <li>Xbox Game Pass</li>
+      <li>Xtreme Sports</li>
+    </ul>
+  </div>
+
+  <!-- Y Section -->
+  <div class="alphabet-section" id="Y">
+    <h2>Y</h2>
+    <ul>
+      <li>Yakuza 0</li>
+      <li>Yakuza Kiwami</li>
+      <li>Yakuza Kiwami 2</li>
+      <li>Yakuza Like a Dragon</li>
+      <li>Ys VIII: Lacrimosa of Dana</li>
+      <li>Yu-Gi-Oh! Duel Links</li>
+      <li>Yonder: The Cloud Catcher Chronicles</li>
+    </ul>
+  </div>
+
+  <!-- Z Section -->
+  <div class="alphabet-section" id="Z">
+    <h2>Z</h2>
+    <ul>
+      <li>Zelda: Breath of the Wild</li>
+      <li>Zelda: Tears of the Kingdom</li>
+      <li>Zero Escape: The Nonary Games</li>
+      <li>Zombie Army 4: Dead War</li>
+      <li>Zombieland: Double Tap - Road Trip</li>
+      <li>Zone of the Enders</li>
+      <li>Zumba Fitness</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Bottom Alphabet Navigation -->
+<div class="alphabet-nav">
+  A-Z:
+  <span>
+    <a href="#A">A</a>
+    <a href="#B">B</a>
+    <a href="#C">C</a>
+    <a href="#D">D</a>
+    <a href="#E">E</a>
+    <a href="#F">F</a>
+    <a href="#G">G</a>
+    <a href="#H">H</a>
+    <a href="#I">I</a>
+    <a href="#J">J</a>
+    <a href="#K">K</a>
+    <a href="#L">L</a>
+    <a href="#M">M</a>
+    <a href="#N">N</a>
+    <a href="#O">O</a>
+    <a href="#P">P</a>
+    <a href="#Q">Q</a>
+    <a href="#R">R</a>
+    <a href="#S">S</a>
+    <a href="#T">T</a>
+    <a href="#U">U</a>
+    <a href="#V">V</a>
+    <a href="#W">W</a>
+    <a href="#X">X</a>
+    <a href="#Y">Y</a>
+    <a href="#Z">Z</a>
+  </span>
+</div>
+
+<!-- Back to Top Button -->
+<button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- Footer -->
+<footer class="text-white py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+        <a class="navbar-brand d-block mb-3" href="#">
+          <img src="sports_esports_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top me-2">
+          CONTRABAN<span>UNLEASHED</span>
+        </a>
+        <p>The ultimate destination for gamers. Explore, play, connect.</p>
+        <div class="social-icons">
+          <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="text-white me-2"><i class="fab fa-discord"></i></a>
+          <a href="#" class="text-white"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-md-4 text-center mb-3 mb-md-0">
+        <h5 class="mb-3">Quick Links</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="A-Z.html">All Games (A-Z)</a></li>
+          <li class="nav-item"><a class="nav-link" href="dropdown.html">Categories</a></li>
+          <li class="nav-item"><a class="nav-link" href="community.html">Community</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 text-center text-md-end">
+        <h5 class="mb-3">Support</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="support.html">Support</a></li>
+          <li class="nav-item"><a class="nav-link" href="request.html">Request Games</a></li>
+          <li class="nav-item"><a class="nav-link" href="updates.html">Request Updates</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+    <div class="row">
+      <div class="col-md-6 text-center text-md-start">
+        <p class="mb-0">&copy; 2025 CONTRABAN UNLEASHED. All rights reserved.</p>
+      </div>
+      <div class="col-md-6 text-center text-md-end">
+        <ul class="nav justify-content-center justify-content-md-end">
+          <li class="nav-item"><a class="nav-link" href="#">Privacy Policy</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Terms of Service</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  // Back to Top Button
+  window.addEventListener('scroll', function() {
+    const backToTop = document.getElementById('backToTop');
+    if (window.pageYOffset > 300) {
+      backToTop.classList.add('visible');
+    } else {
+      backToTop.classList.remove('visible');
+    }
+  });
+
+  
+</script>
+
+<script src="js/script.js"></script>
+</body>
+</html>

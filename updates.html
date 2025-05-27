@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Updates</title>
+
+   <!--favicon-->
+  <link rel="shortcut icon" href="images/Neon Pixel Game Circle .png" type="image/x-icon">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+   <!--Google font-->
+   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+  <!--Custom CSS-->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Press+Start+2P&display=swap');
+    
+    :root {
+      --neon-pink: #ff2a6d;
+      --neon-blue: #05d9e8;
+      --neon-purple: #d300c5;
+      --neon-green: #00ff9d;
+      --dark-bg: #0d0221;
+      --darker-bg: #050110;
+      --glow-blue: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+      --glow-pink: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
+      --glow-green: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
+    }
+    
+    body {
+      background-color: var(--dark-bg);
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(255, 42, 109, 0.15) 0%, transparent 25%),
+        radial-gradient(circle at 80% 70%, rgba(5, 217, 232, 0.15) 0%, transparent 25%);
+      color: white;
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    
+    .header {
+      background: linear-gradient(to right, var(--darker-bg), var(--dark-bg));
+      border-bottom: 2px solid var(--neon-purple);
+      box-shadow: var(--glow-pink);
+      padding: 2rem 0;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .header h1 {
+      font-family: 'Press Start 2P', cursive;
+      color: var(--neon-blue);
+      text-shadow: var(--glow-blue);
+      margin: 0;
+      font-size: 2.5rem;
+      letter-spacing: 3px;
+      animation: pulse 2s infinite alternate;
+    }
+    
+    .section {
+      background-color: rgba(13, 2, 33, 0.8);
+      border: 1px solid var(--neon-purple);
+      border-radius: 8px;
+      box-shadow: 0 0 15px var(--neon-purple);
+      margin: 2rem auto;
+      padding: 1.5rem;
+      width: 85%;
+      max-width: 1000px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--neon-pink), var(--neon-blue), var(--neon-green));
+    }
+    
+    .section h2 {
+      color: var(--neon-green);
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1.5rem;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      text-shadow: var(--glow-green);
+      border-bottom: 1px solid var(--neon-blue);
+      padding-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+    
+    .update-item {
+      background-color: rgba(5, 1, 16, 0.5);
+      border-left: 3px solid var(--neon-pink);
+      margin-bottom: 1.5rem;
+      padding: 1.2rem;
+      border-radius: 0 5px 5px 0;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .update-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 0 15px rgba(255, 42, 109, 0.3);
+      border-left: 3px solid var(--neon-blue);
+    }
+    
+    .update-item h3 {
+      color: var(--neon-blue);
+      margin-top: 0;
+      margin-bottom: 0.8rem;
+      font-size: 1.3rem;
+    }
+    
+    .update-item p {
+      margin: 0.5rem 0;
+    }
+    
+    .update-item strong {
+      color: var(--neon-green);
+    }
+    
+    .footer {
+      background: linear-gradient(to right, var(--dark-bg), var(--darker-bg));
+      border-top: 2px solid var(--neon-purple);
+      box-shadow: var(--glow-pink);
+      color: var(--neon-blue);
+      text-align: center;
+      padding: 1.5rem 0;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+    }
+    
+    .footer p {
+      margin: 0.5rem 0;
+    }
+    
+    /* Animations */
+    @keyframes pulse {
+      0% {
+        text-shadow: var(--glow-blue);
+      }
+      100% {
+        text-shadow: 0 0 15px var(--neon-blue), 0 0 30px var(--neon-blue), 0 0 45px var(--neon-blue);
+      }
+    }
+    
+    @keyframes scanline {
+      0% {
+        transform: translateY(-100%);
+      }
+      100% {
+        transform: translateY(100%);
+      }
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .section {
+        width: 90%;
+        padding: 1rem;
+      }
+      
+      .section h2 {
+        font-size: 1.2rem;
+      }
+      
+      .update-item h3 {
+        font-size: 1.1rem;
+      }
+    }
+    
+    /* Special effects */
+    .update-item::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.03) 0%,
+        rgba(255, 255, 255, 0) 10%,
+        rgba(255, 255, 255, 0) 90%,
+        rgba(255, 255, 255, 0.03) 100%
+      );
+      pointer-events: none;
+    }
+    
+    /* Grid layout for larger screens */
+    @media (min-width: 992px) {
+      .section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+      
+      .section h2 {
+        grid-column: 1 / -1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <h1>GAME UPDATES</h1>
+  </header>
+
+  <div class="section" id="new-releases">
+    <h2>NEW GAME RELEASES</h2>
+    <div class="update-item">
+      <h3>THE ELDER SCROLLS VI</h3>
+      <p><strong>RELEASE DATE:</strong> NOVEMBER 15, 2025</p>
+      <p><strong>DESCRIPTION:</strong> The next chapter in the Elder Scrolls series promises to bring new lands, quests, and stories. Get ready to explore a completely new world!</p>
+    </div>
+
+    <div class="update-item">
+      <h3>CYBERPUNK 2077: PHANTOM LIBERTY</h3>
+      <p><strong>RELEASE DATE:</strong> OCTOBER 2025</p>
+      <p><strong>DESCRIPTION:</strong> A huge expansion to the original game, featuring a new storyline, locations, and characters in the cyberpunk universe.</p>
+    </div>
+
+    <div class="update-item">
+      <h3>STARFIELD: GALACTIC EDITION</h3>
+      <p><strong>RELEASE DATE:</strong> SEPTEMBER 2025</p>
+      <p><strong>DESCRIPTION:</strong> The definitive edition of Starfield with all DLCs included and enhanced graphics for next-gen consoles.</p>
+    </div>
+
+    <div class="update-item">
+      <h3>FINAL FANTASY XVII</h3>
+      <p><strong>RELEASE DATE:</strong> DECEMBER 2025</p>
+      <p><strong>DESCRIPTION:</strong> The latest installment in the legendary RPG series brings a brand new world and combat system.</p>
+    </div>
+  </div>
+
+  <div class="section" id="modifications">
+    <h2>GAME MODIFICATIONS & UPDATES</h2>
+    <div class="update-item">
+      <h3>FORTNITE: CHAPTER 4 - SEASON 2 UPDATE</h3>
+      <p><strong>UPDATE DATE:</strong> MAY 1, 2025</p>
+      <p><strong>WHAT'S NEW:</strong> New battle passes, weapons, and a new map section. There are also performance improvements and bug fixes.</p>
+    </div>
+
+    <div class="update-item">
+      <h3>MINECRAFT 1.21 - "CAVES & CLIFFS PART 3"</h3>
+      <p><strong>UPDATE DATE:</strong> APRIL 2025</p>
+      <p><strong>WHAT'S NEW:</strong> Major changes to the cave generation, new mobs, and a whole new set of ores to mine. Get ready to explore deeper than ever before!</p>
+    </div>
+
+    <div class="update-item">
+      <h3>VALORANT: EPISODE 7 UPDATE</h3>
+      <p><strong>UPDATE DATE:</strong> JUNE 2025</p>
+      <p><strong>WHAT'S NEW:</strong> New agent, map reworks, and weapon balancing changes to shake up the competitive scene.</p>
+    </div>
+
+    <div class="update-item">
+      <h3>LEAGUE OF LEGENDS: SEASON 2025</h3>
+      <p><strong>UPDATE DATE:</strong> JANUARY 2025</p>
+      <p><strong>WHAT'S NEW:</strong> Complete jungle overhaul, new items, and visual updates to several classic champions.</p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2025 GAME UPDATE TRACKER. ALL RIGHTS RESERVED.</p>
+    <p>STAY UPDATED WITH THE LATEST GAME NEWS!</p>
+  </footer>
+
+  <script>
+    // Add interactive effects
+    document.querySelectorAll('.update-item').forEach(item => {
+      item.addEventListener('mouseenter', function() {
+        this.style.borderLeft = `3px solid ${Math.random() > 0.5 ? 'var(--neon-green)' : 'var(--neon-blue)'}`;
+      });
+      
+      item.addEventListener('mouseleave', function() {
+        this.style.borderLeft = '3px solid var(--neon-pink)';
+      });
+    });
+    
+    // Add animation when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      const items = document.querySelectorAll('.update-item');
+      items.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+          item.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+          item.style.opacity = '1';
+          item.style.transform = 'translateY(0)';
+        }, 100);
+      });
+    });
+  </script>
+</body>
+</html>
